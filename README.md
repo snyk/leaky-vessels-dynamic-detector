@@ -5,7 +5,7 @@
 In this repository you'll find a reference implementation for an eBPF-based runtime detection for the runc and Docker vulnerabilities `CVE-2024-21626`, `CVE-2024-23651`, `CVE-2024-23652` and `CVE-2024-23653`. It hooks into Linux syscalls (e.g., `chdir`, `mount`) and function invocations of the Docker daemon and associates them with Docker builds and container processes to identify exploitations of these vulnerabilities.
 For a static analysis-based approach, please see [this](https://github.com/snyk/leaky-vessels-static-detector). 
 
-### WORKDIR: Order of Operations Container Breakout [CVE-2024-21626]
+### runc process.cwd & Leaked fds Container Breakout [CVE-2024-21626]
 
 CVE-2024-21626 is a vulnerability in the `runc` container runtime allowing an attacker to break out of the container isolation and achieve full root RCE via a crafted image that exploits an issue within the `WORKDIR` instruction's handling. Since there's a "race" condition between the time some file descriptors to the host are opened and closed, an attacker can create a Dockerfile with the following instruction `WORKDIR /proc/self/fd/[ID]` (with ID being a system dependent file descriptor) that will point to the underlying host machine's file system. This can be exploited when running:
 
