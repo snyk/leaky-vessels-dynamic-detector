@@ -1,0 +1,76 @@
+/*
+ * © 2024 Snyk Limited
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package unlink
+
+import (
+	"os"
+	"sync"
+	"testing"
+	"time"
+
+	"github.com/stretchr/testify/assert"
+)
+
+func TestUnlinkHook(t *testing.T) {
+	cwd, _ := os.Getwd()
+	tempFile, _ := os.CreateTemp(cwd, "tempfile*")
+	var waitGroup sync.WaitGroup
+	waitGroup.Add(1)
+	go Listen(func(event *Event) {
+		if event.Path == tempFile.Name() {
+			waitGroup.Done()
+		}
+	})
+	time.Sleep(time.Second) // Hook is set asynchronously
+	err := os.Remove(tempFile.Name())
+	if err != nil {
+		panic(err)
+	}
+	waitGroup.Wait()
+}
+
+func TestTimestampCollection(t *testing.T) {
+	var waitGroup sync.WaitGroup
+	waitGroup.Add(2)
+	cwd, _ := os.Getwd()
+	tempFile1, _ := os.CreateTemp(cwd, "tempfile1*")
+	tempFile2, _ := os.CreateTemp(cwd, "tempfile1*")
+	timestamps := []uint64{}
+
+	go Listen(func(event *Event) {
+		if event.Path == tempFile1.Name() || event.Path == tempFile2.Name() {
+			timestamps = append(timestamps, event.TimestampMicros)
+			waitGroup.Done()
+		}
+	})
+	time.Sleep(1 * time.Second) // Hook is set asynchronously
+	err := os.Remove(tempFile1.Name())
+	if err != nil {
+		panic(err)
+	}
+	sleepTime := 5 * time.Millisecond
+	time.Sleep(sleepTime)
+	err = os.Remove(tempFile2.Name())
+	if err != nil {
+		panic(err)
+	}
+	waitGroup.Wait()
+	assert.Equal(t, len(timestamps), 2)
+	diff := timestamps[1] - timestamps[0]
+	expectedMinDiff := uint64(sleepTime.Microseconds())
+	assert.True(t, diff > expectedMinDiff)   // Difference should be at least the diff time
+	assert.True(t, 2*expectedMinDiff > diff) // But not much more than that
+}

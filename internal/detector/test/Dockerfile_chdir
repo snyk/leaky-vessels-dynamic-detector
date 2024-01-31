@@ -1,0 +1,9 @@
+FROM alpine
+
+RUN mkdir abcd1234 && ln -s abcd1234 /workdir
+
+WORKDIR /workdir
+
+RUN true
+
+CMD cd ../../../../../../../ && ls -l
