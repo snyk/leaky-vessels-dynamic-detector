@@ -40,7 +40,7 @@ const (
 	ldflagsArgs                = "-ldflags="
 	GrpcPrivilegeCheckCve      = "CVE-2024-23653"
 	GrpcPrivilegeCheckName     = "Buildkit GRPC SecurityMode Privilege Check"
-	GrpcPrivilegeCheckBlogLink = "https://snyk.io/blog/cve-2024-23653-docker-buildkit-grpc-securitymode-privilege-check"
+	GrpcPrivilegeCheckBlogLink = "https://snyk.io/blog/cve-2024-23653-buildkit-grpc-securitymode-privilege-check"
 )
 
 type Event struct {

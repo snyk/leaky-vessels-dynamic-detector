@@ -29,7 +29,7 @@ var layerFsRegex = regexp.MustCompile("/var/lib/docker/overlay2/[a-zA-Z0-9]{24,}
 const (
 	cacheRaceCve      = "CVE-2024-23651"
 	cacheRaceName     = "Buildkit Mount Cache Race: Build-time Race Condition Container Breakout"
-	cacheRaceBlogLink = "https://snyk.io/blog/cve-2024-23651-docker-buildkit-mount-cache-race-build-time-race-condition-container-breakout"
+	cacheRaceBlogLink = "https://snyk.io/blog/cve-2024-23651-docker-buildkit-mount-cache-race"
 )
 
 func detectCacheRaceVulnerability(event *mnt.Event) {

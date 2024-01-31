@@ -20,7 +20,7 @@ import "strings"
 const (
 	containerTeardownDeleteCve      = "CVE-2024-23652"
 	containerTeardownDeleteName     = "Buildkit Build-time Container Teardown Arbitrary Delete"
-	containerTeardownDeleteBlogLink = "https://snyk.io/blog/cve-2024-23652-docker-buildkit-build-time-container-teardown-arbitrary-delete"
+	containerTeardownDeleteBlogLink = "https://snyk.io/blog/cve-2024-23652-buildkit-build-time-container-teardown-arbitrary-delete"
 )
 
 func detectContainerTeardownDeleteVulnerability(executionEvents *buildkitExecutionEvents) bool {
