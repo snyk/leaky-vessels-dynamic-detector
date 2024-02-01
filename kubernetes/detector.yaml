@@ -36,6 +36,9 @@ spec:
             - name: boot-host
               mountPath: /boot.host
               readOnly: true
+            - name: sysfs
+              mountPath: /sys
+              readOnly: true
           env:
             - name: HOST_ROOT_FS
               value: /boot.host
@@ -46,3 +49,6 @@ spec:
         - name: boot-host
           hostPath:
             path: /
+        - name: sysfs
+          hostPath:
+            path: /sys
