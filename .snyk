@@ -1,0 +1,30 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.25.0
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
+ignore:
+  'SNYK-CC-K8S-1':
+    - 'kubernetes/detector.yaml > *':
+        reason: The container must run in privileged mode
+        expires: 2025-03-03T11:12:59.857Z
+        created: 2024-02-02T11:12:59.859Z
+  'SNYK-CC-K8S-3':
+    - 'kubernetes/detector.yaml > *':
+        reason: The container must run in privileged mode
+        expires: 2025-03-03T11:13:50.334Z
+        created: 2024-02-02T11:13:50.339Z
+  'SNYK-CC-K8S-6':
+    - 'kubernetes/detector.yaml > *':
+        reason: The container must run in privileged mode
+        expires: 2025-03-03T11:13:57.692Z
+        created: 2024-02-02T11:13:57.698Z
+  'SNYK-CC-K8S-9':
+    - 'kubernetes/detector.yaml > *':
+        reason: The container must run in privileged mode
+        expires: 2025-03-03T11:14:11.934Z
+        created: 2024-02-02T11:14:11.940Z
+  'SNYK-CC-K8S-10':
+    - 'kubernetes/detector.yaml > *':
+        reason: The container must run in privileged mode
+        expires: 2025-03-03T11:14:22.399Z
+        created: 2024-02-02T11:14:22.405Z
+patch: {}

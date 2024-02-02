@@ -1,0 +1,17 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: leaky-vessels-dynamic-detector
+  description: Leaky Vessels detector
+  annotations:
+    github.com/project-slug: snyk/leaky-vessels-dynamic-detector
+    github.com/team-slug: snyk/security-labs
+    backstage.io/techdocs-ref: dir:.
+  labels:
+    snyk.io/businessCriticality: high
+    snyk.io/visibility: public
+    snyk.io/metadata-version: "2022-23-01"
+spec:
+  type: external-tooling
+  lifecycle: "-"
+  owner: security-labs
