@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   prodsec: snyk/prodsec-orb@1
+  go: circleci/go@1.21
 
 defaults: &defaults
   resource_class: small
@@ -15,6 +16,21 @@ jobs:
       - checkout
       - prodsec/security_scans:
           mode: auto
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - go/install:
+          version: "1.21"
+      - go/load-cache:
+          key: test_leaky_vessels_ebpf_detector
+      - run:
+          name: Run tests
+          command: sudo su -c "/snap/bin/go test ebpf-detector/..."
+          no_output_timeout: 3m
+      - go/save-cache:
+          key: test_leaky_vessels_ebpf_detector
+          path: /home/circleci/.go_workspace/pkg/mod
 
 workflows:
   version: 2
@@ -29,3 +45,9 @@ workflows:
           name: Security Scans
           context:
             - security-labs-snyk
+      - test:
+          name: Test
+          filters:
+            branches:
+              ignore:
+                - main
