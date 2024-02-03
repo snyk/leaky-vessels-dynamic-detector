@@ -15,6 +15,16 @@ jobs:
       - checkout
       - prodsec/security_scans:
           mode: auto
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: Install go 1.21 as root
+          command: sudo snap install go --channel=1.21/stable --classic
+      - run:
+          name: Run tests
+          command: sudo su -c "/snap/bin/go test ebpf-detector/..."
 
 workflows:
   version: 2
@@ -29,3 +39,9 @@ workflows:
           name: Security Scans
           context:
             - security-labs-snyk
+      - test:
+          name: Test
+          filters:
+            branches:
+              ignore:
+                - main
