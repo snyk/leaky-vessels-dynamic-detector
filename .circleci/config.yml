@@ -3,7 +3,6 @@ version: 2.1
 orbs:
   prodsec: snyk/prodsec-orb@1
   go: snyk/go@1.1.0
-  gotest: gotest/tools@0.0.14
 
 defaults: &defaults
   resource_class: small
@@ -22,7 +21,7 @@ jobs:
     steps:
       - checkout
       - go/install:
-          version: "1.21.5"
+          version: "1.21"
       - run:
           name: Run tests
           command: "sudo /usr/local/go/bin/go test ebpf-detector/..."
