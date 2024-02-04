@@ -25,7 +25,7 @@ jobs:
           version: "1.21.5"
       - run:
           name: Run tests
-          command: "sudo go test ebpf-detector/..."
+          command: "sudo /usr/local/go/bin/go test ebpf-detector/..."
           no_output_timeout: 3m
 
 workflows:
