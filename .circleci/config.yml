@@ -23,15 +23,10 @@ jobs:
       - checkout
       - go/install:
           version: "1.21.5"
-      - go/load-cache:
-          key: test_leaky_vessels_ebpf_detector
       - run:
           name: Run tests
           command: "sudo go test ebpf-detector/..."
           no_output_timeout: 3m
-      - go/save-cache:
-          key: test_leaky_vessels_ebpf_detector
-          path: /home/circleci/.go_workspace/pkg/mod
 
 workflows:
   version: 2
