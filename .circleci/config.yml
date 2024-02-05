@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   prodsec: snyk/prodsec-orb@1
+  go: snyk/go@1.1.0
 
 defaults: &defaults
   resource_class: small
@@ -15,6 +16,17 @@ jobs:
       - checkout
       - prodsec/security_scans:
           mode: auto
+  test:
+    machine:
+      image: ubuntu-2204:2023.10.1
+    steps:
+      - checkout
+      - go/install:
+          version: "1.21.6"
+      - run:
+          name: Run tests
+          command: "sudo /usr/local/go/bin/go test ebpf-detector/..."
+          no_output_timeout: 3m
 
 workflows:
   version: 2
@@ -29,3 +41,9 @@ workflows:
           name: Security Scans
           context:
             - security-labs-snyk
+      - test:
+          name: Test
+          filters:
+            branches:
+              ignore:
+                - main
