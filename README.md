@@ -64,7 +64,7 @@ Unit tests need to run in `sudo`, as they rely on eBPF: `sudo go test ebpf-detec
 * Tested in the following environments:
     - Ubuntu 20.04/22.04 (AMD64)
     - GKE (Ubuntu and Alpine Linux, AMD64)
-    - EKS (Ubuntu and Alpine Linux, AMD64)
+    - EKS (Ubuntu and Alpine Linux, AMD64) - supported by EKS version >= 1.25
     - Ubuntu 22.04 (ARM64)
 
 ## Issues
