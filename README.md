@@ -66,6 +66,8 @@ Unit tests need to run in `sudo`, as they rely on eBPF: `sudo go test ebpf-detec
     - GKE (Ubuntu and Alpine Linux, AMD64)
     - EKS (Ubuntu and Alpine Linux, AMD64) - supported by EKS version >= 1.25
     - Ubuntu 22.04 (ARM64)
+* Tried to test in the following environments:
+    - VMware Photon OS/Linux 3.0 (but, eBPF isn't supported by PhotonOS 3.0)
 
 ## Issues
 For updated list of bugs and issues see the project issues. 
