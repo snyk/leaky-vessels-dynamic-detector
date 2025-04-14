@@ -1,3 +1,9 @@
+# WARNING
+This repository is now archived.
+
+No more updates will be made to the code and it may be insecure or even broken by the time you read this notice.
+Consider it for historical purpose only and treat it carefully.
+
 # Leaky Vessels Dynamic Detector
 
 ![snyk-oss-category](https://github.com/snyk-labs/oss-images/blob/d7a72392dd568658c2009a161803959466595094/oss-community.jpg)
